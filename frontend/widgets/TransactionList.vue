@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons-vue';
-import type { Transaction, CreateTransactionDto, UpdateTransactionDto } from '../entities/transaction';
+import type {
+  Transaction,
+  CreateTransactionDto,
+  UpdateTransactionDto,
+} from '../entities/transaction';
 import type { Category } from '../entities/category';
 import { formatCurrency, formatDate } from '../shared/lib';
 
@@ -50,7 +54,7 @@ const openCreateModal = (type: 'income' | 'expense') => {
     categoryId: 0,
     date: new Date().toISOString().split('T')[0],
   };
-  filteredCategories.value = props.categories.filter(c => c.type === type);
+  filteredCategories.value = props.categories.filter((c) => c.type === type);
   isModalVisible.value = true;
 };
 
@@ -64,12 +68,12 @@ const openEditModal = (transaction: Transaction) => {
     categoryId: transaction.categoryId,
     date: transaction.date,
   };
-  filteredCategories.value = props.categories.filter(c => c.type === transaction.type);
+  filteredCategories.value = props.categories.filter((c) => c.type === transaction.type);
   isModalVisible.value = true;
 };
 
 const handleTypeChange = (type: 'income' | 'expense') => {
-  filteredCategories.value = props.categories.filter(c => c.type === type);
+  filteredCategories.value = props.categories.filter((c) => c.type === type);
   formState.value.categoryId = 0;
 };
 
@@ -89,8 +93,13 @@ const handleDelete = (id: number) => {
 
 <template>
   <div>
-    <a-space style="margin-bottom: 16px;" size="large">
-      <a-button type="primary" size="large" @click="openCreateModal('income')" style="background: #52c41a; border-color: #52c41a;">
+    <a-space style="margin-bottom: 16px" size="large">
+      <a-button
+        type="primary"
+        size="large"
+        @click="openCreateModal('income')"
+        style="background: #52c41a; border-color: #52c41a"
+      >
         <PlusOutlined />
         Доход
       </a-button>
@@ -100,12 +109,7 @@ const handleDelete = (id: number) => {
       </a-button>
     </a-space>
 
-    <a-table
-      :dataSource="transactions"
-      :columns="columns"
-      :loading="loading"
-      :row-key="(record: Transaction) => record.id"
-    >
+    <a-table :dataSource="transactions || []" :columns="columns" :loading="loading" rowKey="id">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'date'">
           {{ formatDate(record.date) }}
@@ -126,7 +130,12 @@ const handleDelete = (id: number) => {
         <template v-if="column.key === 'actions'">
           <a-space>
             <a-button size="small" @click="openEditModal(record)">Изменить</a-button>
-            <a-popconfirm title="Удалить транзакцию?" ok-text="Да" cancel-text="Нет" @confirm="handleDelete(record.id)">
+            <a-popconfirm
+              title="Удалить транзакцию?"
+              ok-text="Да"
+              cancel-text="Нет"
+              @confirm="handleDelete(record.id)"
+            >
               <a-button size="small" danger>Удалить</a-button>
             </a-popconfirm>
           </a-space>
@@ -143,7 +152,10 @@ const handleDelete = (id: number) => {
     >
       <a-form :model="formState" layout="vertical">
         <a-form-item label="Тип" name="type">
-          <a-radio-group v-model:value="formState.type" @change="() => handleTypeChange(formState.type)">
+          <a-radio-group
+            v-model:value="formState.type"
+            @change="() => handleTypeChange(formState.type)"
+          >
             <a-radio-button value="expense">Расход</a-radio-button>
             <a-radio-button value="income">Доход</a-radio-button>
           </a-radio-group>
@@ -158,7 +170,7 @@ const handleDelete = (id: number) => {
         </a-form-item>
 
         <a-form-item label="Сумма" name="amount">
-          <a-input-number v-model:value="formState.amount" :min="0" style="width: 100%;" />
+          <a-input-number v-model:value="formState.amount" :min="0" style="width: 100%" />
         </a-form-item>
 
         <a-form-item label="Описание" name="description">

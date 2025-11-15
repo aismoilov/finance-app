@@ -1,5 +1,10 @@
 import api from '../../../shared/api/client';
-import type { Transaction, CreateTransactionDto, UpdateTransactionDto, Statistics } from '../model/types';
+import type {
+  Transaction,
+  CreateTransactionDto,
+  UpdateTransactionDto,
+  Statistics,
+} from '../model/types';
 
 export const transactionsApi = {
   getAll: (type?: 'income' | 'expense', month?: number, year?: number) => {
@@ -17,6 +22,7 @@ export const transactionsApi = {
     return api.get<Statistics>('/transactions/statistics', { params });
   },
   create: (data: CreateTransactionDto) => api.post<Transaction>('/transactions', data),
-  update: (id: number, data: UpdateTransactionDto) => api.put<Transaction>(`/transactions/${id}`, data),
+  update: (id: number, data: UpdateTransactionDto) =>
+    api.put<Transaction>(`/transactions/${id}`, data),
   delete: (id: number) => api.delete(`/transactions/${id}`),
 };

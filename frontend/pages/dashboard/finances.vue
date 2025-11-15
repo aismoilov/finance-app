@@ -3,11 +3,11 @@
     <div>
       <h1>Финансы</h1>
 
-      <a-space style="margin-bottom: 16px;">
+      <a-space style="margin-bottom: 16px">
         <a-select
           v-model:value="selectedMonth"
           placeholder="Выберите месяц"
-          style="width: 150px;"
+          style="width: 150px"
           @change="handleFilterChange"
           allow-clear
         >
@@ -19,7 +19,7 @@
         <a-select
           v-model:value="selectedYear"
           placeholder="Выберите год"
-          style="width: 120px;"
+          style="width: 120px"
           @change="handleFilterChange"
           allow-clear
         >
@@ -31,13 +31,13 @@
 
       <StatisticsCards :statistics="transactionStore.statistics" />
 
-      <a-row :gutter="16" style="margin-top: 16px;">
+      <a-row :gutter="16" style="margin-top: 16px">
         <a-col :span="24">
           <ExpenseChart :transactions="transactionStore.transactions" />
         </a-col>
       </a-row>
 
-      <a-row :gutter="16" style="margin-top: 16px;">
+      <a-row :gutter="16" style="margin-top: 16px">
         <a-col :span="24">
           <TransactionList
             :transactions="transactionStore.transactions"
@@ -55,8 +55,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue';
-import { useTransactionStore } from '../../entities/transaction';
-import { useCategoryStore } from '../../entities/category';
+import { useTransactionStore } from '~/entities/transaction';
+import { useCategoryStore } from '~/entities/category';
 import { StatisticsCards, TransactionList, ExpenseChart } from '../../widgets';
 import type { CreateTransactionDto, UpdateTransactionDto } from '../../entities/transaction';
 import { message } from '../../shared/lib';

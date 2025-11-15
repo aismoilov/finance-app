@@ -11,10 +11,10 @@ const props = defineProps<{
 }>();
 
 const expensesByCategory = computed(() => {
-  const expenses = props.transactions.filter(t => t.type === 'expense');
+  const expenses = props.transactions.filter((t) => t.type === 'expense');
   const categoryMap = new Map<string, number>();
 
-  expenses.forEach(t => {
+  expenses.forEach((t) => {
     const categoryName = t.category?.name || 'Без категории';
     const current = categoryMap.get(categoryName) || 0;
     categoryMap.set(categoryName, current + t.amount);
@@ -24,11 +24,11 @@ const expensesByCategory = computed(() => {
 });
 
 const chartData = computed(() => ({
-  labels: expensesByCategory.value.map(item => item.name),
+  labels: expensesByCategory.value.map((item) => item.name),
   datasets: [
     {
       backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
-      data: expensesByCategory.value.map(item => item.amount),
+      data: expensesByCategory.value.map((item) => item.amount),
     },
   ],
 }));
@@ -45,8 +45,8 @@ const chartOptions = {
 </script>
 
 <template>
-  <a-card title="Расходы по категориям" style="height: 400px;">
-    <div v-if="expensesByCategory.length > 0" style="height: 300px;">
+  <a-card title="Расходы по категориям" style="height: 400px">
+    <div v-if="expensesByCategory.length > 0" style="height: 300px">
       <Doughnut :data="chartData" :options="chartOptions" />
     </div>
     <a-empty v-else description="Нет данных" />

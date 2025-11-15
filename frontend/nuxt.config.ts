@@ -4,4 +4,4 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt'],
   css: ['ant-design-vue/dist/reset.css'],
   ssr: false,
-})
+});

@@ -5,24 +5,24 @@ export declare class TransactionsController {
     constructor(transactionsService: TransactionsService);
     findAll(req: any, type?: string, month?: string, year?: string): Promise<({
         category: {
-            name: string;
-            id: number;
             createdAt: Date;
+            id: number;
+            name: string;
+            userId: number | null;
             updatedAt: Date;
             type: string;
             isDefault: boolean;
-            userId: number | null;
         };
     } & {
-        id: number;
         createdAt: Date;
-        updatedAt: Date;
-        type: string;
+        id: number;
         userId: number;
+        updatedAt: Date;
         amount: number;
         description: string | null;
-        categoryId: number;
+        type: string;
         date: Date;
+        categoryId: number;
     })[]>;
     getStatistics(req: any, month?: string, year?: string): Promise<{
         totalIncome: number;
@@ -31,66 +31,66 @@ export declare class TransactionsController {
     }>;
     findOne(req: any, id: string): Promise<{
         category: {
-            name: string;
-            id: number;
             createdAt: Date;
+            id: number;
+            name: string;
+            userId: number | null;
             updatedAt: Date;
             type: string;
             isDefault: boolean;
-            userId: number | null;
         };
     } & {
-        id: number;
         createdAt: Date;
-        updatedAt: Date;
-        type: string;
+        id: number;
         userId: number;
+        updatedAt: Date;
         amount: number;
         description: string | null;
-        categoryId: number;
+        type: string;
         date: Date;
+        categoryId: number;
     }>;
     create(req: any, createTransactionDto: CreateTransactionDto): Promise<{
         category: {
-            name: string;
-            id: number;
             createdAt: Date;
+            id: number;
+            name: string;
+            userId: number | null;
             updatedAt: Date;
             type: string;
             isDefault: boolean;
-            userId: number | null;
         };
     } & {
-        id: number;
         createdAt: Date;
-        updatedAt: Date;
-        type: string;
+        id: number;
         userId: number;
+        updatedAt: Date;
         amount: number;
         description: string | null;
-        categoryId: number;
+        type: string;
         date: Date;
+        categoryId: number;
     }>;
     update(req: any, id: string, updateTransactionDto: UpdateTransactionDto): Promise<{
         category: {
-            name: string;
-            id: number;
             createdAt: Date;
+            id: number;
+            name: string;
+            userId: number | null;
             updatedAt: Date;
             type: string;
             isDefault: boolean;
-            userId: number | null;
         };
     } & {
-        id: number;
         createdAt: Date;
-        updatedAt: Date;
-        type: string;
+        id: number;
         userId: number;
+        updatedAt: Date;
         amount: number;
         description: string | null;
-        categoryId: number;
+        type: string;
         date: Date;
+        categoryId: number;
     }>;
     delete(req: any, id: string): Promise<void>;
 }

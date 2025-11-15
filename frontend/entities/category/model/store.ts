@@ -9,8 +9,8 @@ export const useCategoryStore = defineStore('category', {
   }),
 
   getters: {
-    expenseCategories: (state) => state.categories.filter(c => c.type === 'expense'),
-    incomeCategories: (state) => state.categories.filter(c => c.type === 'income'),
+    expenseCategories: (state) => state.categories.filter((c) => c.type === 'expense'),
+    incomeCategories: (state) => state.categories.filter((c) => c.type === 'income'),
   },
 
   actions: {
@@ -40,7 +40,7 @@ export const useCategoryStore = defineStore('category', {
     async updateCategory(id: number, data: UpdateCategoryDto) {
       try {
         const response = await categoriesApi.update(id, data);
-        const index = this.categories.findIndex(c => c.id === id);
+        const index = this.categories.findIndex((c) => c.id === id);
         if (index !== -1) {
           this.categories[index] = response.data;
         }
@@ -53,7 +53,7 @@ export const useCategoryStore = defineStore('category', {
     async deleteCategory(id: number) {
       try {
         await categoriesApi.delete(id);
-        this.categories = this.categories.filter(c => c.id !== id);
+        this.categories = this.categories.filter((c) => c.id !== id);
       } catch (error: any) {
         throw error.response?.data?.message || 'Failed to delete category';
       }

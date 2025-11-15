@@ -16,7 +16,7 @@ export class TransactionsService {
     if (month && year) {
       const startDate = new Date(parseInt(year), parseInt(month) - 1, 1);
       const endDate = new Date(parseInt(year), parseInt(month), 0, 23, 59, 59);
-      
+
       where.date = {
         gte: startDate,
         lte: endDate,
@@ -78,11 +78,7 @@ export class TransactionsService {
     });
   }
 
-  async update(
-    userId: number,
-    transactionId: number,
-    updateTransactionDto: UpdateTransactionDto,
-  ) {
+  async update(userId: number, transactionId: number, updateTransactionDto: UpdateTransactionDto) {
     const transaction = await this.prisma.transaction.findUnique({
       where: { id: transactionId },
     });
@@ -150,7 +146,7 @@ export class TransactionsService {
     if (month && year) {
       const startDate = new Date(parseInt(year), parseInt(month) - 1, 1);
       const endDate = new Date(parseInt(year), parseInt(month), 0, 23, 59, 59);
-      
+
       where.date = {
         gte: startDate,
         lte: endDate,

@@ -14,7 +14,14 @@ export const useTransactionStore = defineStore('transaction', {
       this.loading = true;
       try {
         const response = await transactionsApi.getAll(type, month, year);
-        this.transactions = response.data;
+        const raw: any = response?.data ?? response;
+        if (Array.isArray(raw)) {
+          this.transactions = raw;
+        } else if (Array.isArray(raw?.data)) {
+          this.transactions = raw.data;
+        } else {
+          this.transactions = [];
+        }
       } catch (error) {
         console.error('Failed to fetch transactions:', error);
         throw error;
@@ -26,7 +33,8 @@ export const useTransactionStore = defineStore('transaction', {
     async fetchStatistics(month?: number, year?: number) {
       try {
         const response = await transactionsApi.getStatistics(month, year);
-        this.statistics = response.data;
+        const raw: any = response?.data ?? response;
+        this.statistics = raw?.data ?? raw ?? null;
       } catch (error) {
         console.error('Failed to fetch statistics:', error);
         throw error;
@@ -48,7 +56,7 @@ export const useTransactionStore = defineStore('transaction', {
     async updateTransaction(id: number, data: UpdateTransactionDto) {
       try {
         const response = await transactionsApi.update(id, data);
-        const index = this.transactions.findIndex(t => t.id === id);
+        const index = this.transactions.findIndex((t) => t.id === id);
         if (index !== -1) {
           this.transactions[index] = response.data;
         }
@@ -62,7 +70,7 @@ export const useTransactionStore = defineStore('transaction', {
     async deleteTransaction(id: number) {
       try {
         await transactionsApi.delete(id);
-        this.transactions = this.transactions.filter(t => t.id !== id);
+        this.transactions = this.transactions.filter((t) => t.id !== id);
         await this.fetchStatistics();
       } catch (error: any) {
         throw error.response?.data?.message || 'Failed to delete transaction';

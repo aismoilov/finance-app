@@ -3,9 +3,12 @@
 </template>
 
 <script setup lang="ts">
-if (process.client) {
-  const token = localStorage.getItem('token');
-  const redirectPath = token ? '/dashboard/finances' : '/login';
-  window.location.href = redirectPath;
-}
+definePageMeta({
+  middleware: [
+    () => {
+      const token = process.client ? localStorage.getItem('token') : null;
+      return navigateTo(token ? '/dashboard/finances' : '/login');
+    },
+  ],
+});
 </script>

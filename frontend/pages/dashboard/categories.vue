@@ -33,7 +33,7 @@
             </a-col>
             <a-col :xs="24" :sm="12" :md="8" :lg="6">
               <a-card hoverable class="add-card" @click="showAddModal('expense')">
-                <PlusOutlined style="font-size: 48px; color: #1890ff;" />
+                <PlusOutlined style="font-size: 48px; color: #1890ff" />
                 <p>Добавить категорию</p>
               </a-card>
             </a-col>
@@ -71,7 +71,7 @@
             </a-col>
             <a-col :xs="24" :sm="12" :md="8" :lg="6">
               <a-card hoverable class="add-card" @click="showAddModal('income')">
-                <PlusOutlined style="font-size: 48px; color: #52c41a;" />
+                <PlusOutlined style="font-size: 48px; color: #52c41a" />
                 <p>Добавить категорию</p>
               </a-card>
             </a-col>
@@ -87,7 +87,11 @@
       >
         <a-form layout="vertical">
           <a-form-item label="Название" required>
-            <a-input v-model:value="categoryForm.name" size="large" placeholder="Название категории" />
+            <a-input
+              v-model:value="categoryForm.name"
+              size="large"
+              placeholder="Название категории"
+            />
           </a-form-item>
         </a-form>
       </a-modal>
@@ -160,7 +164,7 @@ const handleSaveCategory = async () => {
 onMounted(async () => {
   try {
     await categoriesStore.fetchCategories();
-  } catch (error) {
+  } catch {
     message.error('Ошибка загрузки категорий');
   }
 });

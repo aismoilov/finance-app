@@ -6,86 +6,86 @@ export declare class TransactionsService {
     findAll(userId: number, type?: string, month?: string, year?: string): Promise<({
         category: {
             name: string;
-            id: number;
             createdAt: Date;
             updatedAt: Date;
+            id: number;
             type: string;
             isDefault: boolean;
             userId: number | null;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         type: string;
         userId: number;
         amount: number;
         description: string | null;
-        categoryId: number;
         date: Date;
+        categoryId: number;
     })[]>;
     findOne(userId: number, transactionId: number): Promise<{
         category: {
             name: string;
-            id: number;
             createdAt: Date;
             updatedAt: Date;
+            id: number;
             type: string;
             isDefault: boolean;
             userId: number | null;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         type: string;
         userId: number;
         amount: number;
         description: string | null;
-        categoryId: number;
         date: Date;
+        categoryId: number;
     }>;
     create(userId: number, createTransactionDto: CreateTransactionDto): Promise<{
         category: {
             name: string;
-            id: number;
             createdAt: Date;
             updatedAt: Date;
+            id: number;
             type: string;
             isDefault: boolean;
             userId: number | null;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         type: string;
         userId: number;
         amount: number;
         description: string | null;
-        categoryId: number;
         date: Date;
+        categoryId: number;
     }>;
     update(userId: number, transactionId: number, updateTransactionDto: UpdateTransactionDto): Promise<{
         category: {
             name: string;
-            id: number;
             createdAt: Date;
             updatedAt: Date;
+            id: number;
             type: string;
             isDefault: boolean;
             userId: number | null;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         type: string;
         userId: number;
         amount: number;
         description: string | null;
-        categoryId: number;
         date: Date;
+        categoryId: number;
     }>;
     delete(userId: number, transactionId: number): Promise<void>;
     getStatistics(userId: number, month?: string, year?: string): Promise<{

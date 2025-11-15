@@ -30,11 +30,7 @@ export class CategoriesService {
     });
   }
 
-  async update(
-    userId: number,
-    categoryId: number,
-    updateCategoryDto: UpdateCategoryDto,
-  ) {
+  async update(userId: number, categoryId: number, updateCategoryDto: UpdateCategoryDto) {
     const category = await this.prisma.category.findUnique({
       where: { id: categoryId },
     });

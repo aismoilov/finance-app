@@ -2,10 +2,10 @@
 definePageMeta({
   middleware: [
     function () {
-      return navigateTo('/dashboard/finances')
-    }
-  ]
-})
+      return navigateTo('/dashboard/finances');
+    },
+  ],
+});
 </script>
 
 <template>

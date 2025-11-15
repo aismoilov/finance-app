@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Statistics } from '../entities/transaction';
-import { formatCurrency } from '../shared/lib';
 
 defineProps<{
   statistics: Statistics | null;

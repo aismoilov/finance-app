@@ -5,27 +5,27 @@ export declare class CategoriesService {
     constructor(prisma: PrismaService);
     findAll(userId: number, type?: string): Promise<{
         name: string;
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         type: string;
         isDefault: boolean;
         userId: number | null;
     }[]>;
     create(userId: number, createCategoryDto: CreateCategoryDto): Promise<{
         name: string;
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         type: string;
         isDefault: boolean;
         userId: number | null;
     }>;
     update(userId: number, categoryId: number, updateCategoryDto: UpdateCategoryDto): Promise<{
         name: string;
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         type: string;
         isDefault: boolean;
         userId: number | null;

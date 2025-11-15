@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { EditOutlined } from '@ant-design/icons-vue';
-import { useUserStore } from '../../entities/user';
+import { useUserStore } from '~/entities/user';
 import { message } from '../../shared/lib';
 
 const userStore = useUserStore();
@@ -69,7 +69,7 @@ const handleSave = async () => {
   try {
     message.success('Профиль обновлен');
     modalVisible.value = false;
-  } catch (error: any) {
+  } catch {
     message.error('Ошибка обновления профиля');
   } finally {
     loading.value = false;
