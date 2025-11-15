@@ -1,0 +1,65 @@
+name: Deploy Finance App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: "file:./dev.db"
+      JWT_SECRET: "test-secret-key-for-ci"
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    # Backend setup
+    - name: Install backend dependencies
+      working-directory: ./backend
+      run: npm install
+
+    - name: Generate Prisma Client
+      working-directory: ./backend
+      run: npx prisma generate
+
+    - name: Run Prisma migrations
+      working-directory: ./backend
+      run: npx prisma migrate deploy
+
+    - name: Build backend
+      working-directory: ./backend
+      run: npm run build
+
+    # Frontend setup
+    - name: Install frontend dependencies
+      working-directory: ./frontend
+      run: npm install
+
+    - name: Build frontend
+      working-directory: ./frontend
+      run: npm run build
+      env:
+        NUXT_PUBLIC_API_URL: ${{ secrets.API_URL || 'http://localhost:3001' }}
+
+    # Upload build artifacts
+    - name: Upload backend build
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-dist
+        path: backend/dist
+
+    - name: Upload frontend build
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-dist
+        path: frontend/.output
